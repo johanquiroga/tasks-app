@@ -18,10 +18,12 @@
 		<div class="container" id="app">
 			<h2>Tareas</h2>
 
+			<p class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></p>
+
 			<ul class="list-group tasks">
 				<li v-for="(task, index) in tasks" class="list-group-item"
 					:class="{ editing: task.editing, completed: !task.pending }">
-					<a @click="toggleStatus(task)"><span class="glyphicon"
+					<a role="button" @click="toggleStatus(task)"><span class="glyphicon"
 						:class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check'"
 						aria-hidden="true"></span></a>
 				
@@ -29,31 +31,29 @@
 						<span class="description">{{ task.description }}</span>
 
 						<div>
-							<a @click="editTask(task)">
+							<a role="button" @click="editTask(task)">
 								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 							</a>
-							<a @click="deleteTask(index)">
+							<a role="button" @click="deleteTask(index)">
 								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 							</a>
 						</div>
 					</template>
 
 					<template v-else>
-						<input type="text" v-model.trim="draft">
+						<input role="text" v-model.trim="draft" @keyup.enter="updateTask(task)" @keyup.esc="discardTask(task)">
 
 						<div>
-							<a @click="updateTask(task)">
+							<a role="button" @click="updateTask(task)">
 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 							</a>
-							<a @click="discardTask(task)">
+							<a role="button" @click="discardTask(task)">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</div>
 					</template>
 				</li>
 			</ul>
-
-			<p><a @click="deleteCompleted">Eliminar tareas completadas</a></p>
 
 			<form @submit.prevent="createTask" class="new-task-form">
 				<input v-model.trim="new_task" type="text" class="form-control">
