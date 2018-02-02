@@ -19,22 +19,38 @@
 			<h2>Tareas</h2>
 
 			<ul class="list-group tasks">
-				<li class="list-group-item">
-					<a href="#"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></a>
-					
-					<span class="description">Aprender Vue.js</span>
+				<li v-for="task in tasks" class="list-group-item"
+					:class="{ editing: task.editing, completed: !task.pending }">
+					<a href="#"><span class="glyphicon" :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check'" aria-hidden="true"></span></a>
+				
+					<template v-if="!task.editing">
+						<span class="description">{{ task.description }}</span>
 
-					<div>
-						<a href="#">
-							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-						</a>
-						<a href="#">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</a>
-					</div>
+						<div>
+							<a href="#">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</a>
+						</div>
+					</template>
+
+					<template v-else>
+						<input type="text" v-model="task.description">
+
+						<div>
+							<a href="#">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</a>
+						</div>
+					</template>
 				</li>
 
-				<li class="list-group-item editing">
+				<!-- <li class="list-group-item editing">
 					<a href="#"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></a>
 
 					<input type="text" value="Suscribirse en Styde">
@@ -47,10 +63,10 @@
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</a>
 					</div>
-				</li>
+				</li> -->
 
-				<li class="list-group-item completed">
-					<a href="#"><span class="glyphicon glyphicon-checked" aria-hidden="true"></span></a>
+				<!-- <li class="list-group-item completed">
+					<a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></a>
 					
 					<span class="description">Crear una API</span>
 
@@ -62,7 +78,7 @@
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</a>
 					</div>
-				</li>
+				</li> -->
 			</ul>
 
 			<footer class="footer">
@@ -75,7 +91,23 @@
 			var vm = new Vue({
 				el: '#app',
 				data: {
-
+					tasks: [
+						{
+							description: 'Aprender Vue.js',
+							pending: true,
+							editing: false
+						},
+						{
+							description: 'Suscribirse a Styde.net',
+							pending: true,
+							editing: true
+						},
+						{
+							description: 'Crear una API',
+							pending: false,
+							editing: false
+						}
+					]
 				}
 			})
 		</script>
