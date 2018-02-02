@@ -37,7 +37,7 @@
 					</template>
 
 					<template v-else>
-						<input type="text" v-model="task.description">
+						<input type="text" v-model.trim="task.description">
 
 						<div>
 							<a href="#">
@@ -49,37 +49,12 @@
 						</div>
 					</template>
 				</li>
-
-				<!-- <li class="list-group-item editing">
-					<a href="#"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span></a>
-
-					<input type="text" value="Suscribirse en Styde">
-
-					<div>
-						<a href="#">
-							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-						</a>
-						<a href="#">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</a>
-					</div>
-				</li> -->
-
-				<!-- <li class="list-group-item completed">
-					<a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></a>
-					
-					<span class="description">Crear una API</span>
-
-					<div>
-						<a href="#">
-							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-						</a>
-						<a href="#">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</a>
-					</div>
-				</li> -->
 			</ul>
+
+			<form @submit.prevent="createTask" class="new-task-form">
+				<input v-model.trim="new_task" type="text" class="form-control">
+				<button class="btn btn-primary">Crear tarea</button>
+			</form>
 
 			<footer class="footer">
 				<p>&copy; 2018 Johan Quiroga</p> 
@@ -87,29 +62,6 @@
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-		<script>
-			var vm = new Vue({
-				el: '#app',
-				data: {
-					tasks: [
-						{
-							description: 'Aprender Vue.js',
-							pending: true,
-							editing: false
-						},
-						{
-							description: 'Suscribirse a Styde.net',
-							pending: true,
-							editing: true
-						},
-						{
-							description: 'Crear una API',
-							pending: false,
-							editing: false
-						}
-					]
-				}
-			})
-		</script>
+		<script src="app.js"></script>
 	</body>
 </html>
