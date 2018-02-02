@@ -21,13 +21,15 @@
 			<ul class="list-group tasks">
 				<li v-for="task in tasks" class="list-group-item"
 					:class="{ editing: task.editing, completed: !task.pending }">
-					<a href="#"><span class="glyphicon" :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check'" aria-hidden="true"></span></a>
+					<a @click="toggleStatus(task)"><span class="glyphicon"
+						:class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check'"
+						aria-hidden="true"></span></a>
 				
 					<template v-if="!task.editing">
 						<span class="description">{{ task.description }}</span>
 
 						<div>
-							<a href="#">
+							<a @click="editTask(task)">
 								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 							</a>
 							<a href="#">
@@ -37,13 +39,13 @@
 					</template>
 
 					<template v-else>
-						<input type="text" v-model.trim="task.description">
+						<input type="text" v-model.trim="draft">
 
 						<div>
-							<a href="#">
+							<a @click="updateTask(task)">
 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 							</a>
-							<a href="#">
+							<a @click="discardTask(task)">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</div>
