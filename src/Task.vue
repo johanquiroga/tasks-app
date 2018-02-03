@@ -41,7 +41,7 @@
 		components: {
 			'app-icon': Icon
 		},
-		data () {
+		data() {
 			return {
 				editing: false,
 				draft: ''
@@ -49,18 +49,18 @@
 		},
 		template: '#task-template',
 		props: ['task', 'index'],
-		created: function () {
-			EventBus.$on('editing', function (index) {
+		created() {
+			EventBus.$on('editing', (index) => {
 				if (this.index != index) {
 					this.discard(true);
 				}
-			}.bind(this));
+			});
 		},
 		methods: {
-			toggleStatus: function () {
+			toggleStatus() {
 				this.task.pending = !this.task.pending;
 			},
-			edit: function () {
+			edit() {
 				EventBus.$emit('editing', this.index);
 
 				if (this.draft == '') {
@@ -69,7 +69,7 @@
 
 				this.editing = true;
 			},
-			update: function () {
+			update() {
 				if (this.draft != '') {
 					this.task.description = this.draft;
 					this.draft = '';
@@ -77,14 +77,14 @@
 
 				this.editing = false;
 			},
-			discard: function (keepDraft = false) {
+			discard(keepDraft = false) {
 				if (!keepDraft) {
 					this.draft = '';
 				}
 
 				this.editing = false;
 			},
-			remove: function () {
+			remove() {
 				this.$emit('remove', this.index);
 			},
 		}

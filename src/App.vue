@@ -10,8 +10,8 @@
 		</div>
 
 		<ul class="list-group tasks">
-			<li is="app-task" v-for="(task, index) in tasks"
-			:tasks="tasks" :task="task" :index="index" @remove="deleteTask"></li>
+			<app-task v-for="(task, index) in tasks" :key="task.id"
+			:task="task" :index="index" @remove="deleteTask"></app-task>
 		</ul>
 
 		<form @submit.prevent="createTask" class="new-task-form">
@@ -32,7 +32,12 @@
 		components: {
 			'app-task': Task
 		},
-		data () {
+		created() {
+			this.tasks.forEach((task, index) => {
+				this.$set(task, 'id', index + 1)
+			});
+		},
+		data() {
 			return {
 				new_task: '',
 				tasks: [
@@ -52,7 +57,7 @@
 			}
 		},
 		methods: {
-			createTask: function () {
+			createTask() {
 				if (this.new_task != '') {
 					this.tasks.push({
 						description: this.new_task,
@@ -62,13 +67,11 @@
 					this.new_task = '';
 				}
 			},
-			deleteTask: function (index) {
+			deleteTask(index) {
 				this.tasks.splice(index, 1);
 			},
-			deleteCompleted: function () {
-				this.tasks = this.tasks.filter(function (task) {
-					return task.pending;
-				});
+			deleteCompleted() {
+				this.tasks = this.tasks.filter((task) => task.pending);
 			}
 		}
 	}
