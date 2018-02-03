@@ -22,7 +22,7 @@ Vue.component('app-task', {
 	created: function () {
 		EventBus.$on('editing', function (index) {
 			if (this.index != index) {
-				this.discard();
+				this.discard(true);
 			}
 		}.bind(this));
 	},
@@ -33,18 +33,25 @@ Vue.component('app-task', {
 		edit: function () {
 			EventBus.$emit('editing', this.index);
 
-			this.draft = this.task.description;
+			if (this.draft == '') {
+				this.draft = this.task.description;
+			}
 
 			this.editing = true;
 		},
 		update: function () {
 			if (this.draft != '') {
 				this.task.description = this.draft;
+				this.draft = '';
 			}
 
 			this.editing = false;
 		},
-		discard: function () {
+		discard: function (keepDraft = false) {
+			if (!keepDraft) {
+				this.draft = '';
+			}
+
 			this.editing = false;
 		},
 		remove: function () {
