@@ -20,6 +20,11 @@
 
 			<p class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></p>
 
+			<div class="alert alert-warning" role="alert" v-show="tasks.length == 0">
+				<p class="text-center"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				No hay ninguna tarea!!</p>
+			</div>
+
 			<ul class="list-group tasks">
 				<li is="app-task" v-for="(task, index) in tasks" :tasks="tasks" :task="task" :index="index"></li>
 			</ul>
@@ -38,12 +43,12 @@
 
 		<script type="text/x-template" id="task-template">
 			<li class="list-group-item"
-				:class="{ editing: task.editing, completed: !task.pending }">
+				:class="{ editing: editing, completed: !task.pending }">
 				<a role="button" @click="toggleStatus()">
 					<app-icon :img="task.pending ? 'unchecked' : 'check'" aria-hidden="true"></app-icon>
 				</a>
 			
-				<template v-if="!task.editing">
+				<template v-if="!editing">
 					<span class="description">{{ task.description }}</span>
 
 					<div>

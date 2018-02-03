@@ -9,6 +9,12 @@ Vue.component('app-icon', {
 })
 
 Vue.component('app-task', {
+	data: function () {
+		return {
+			editing: false,
+			draft: ''
+		};
+	},
 	template: '#task-template',
 	props: ['tasks', 'task', 'index'],
 	methods: {
@@ -16,23 +22,24 @@ Vue.component('app-task', {
 			this.task.pending = !this.task.pending;
 		},
 		edit: function () {
+			/* @FIXME: reimplement this.
 			this.tasks.forEach(function (task) {
 				task.editing = false;
-			});
+			});*/
 
 			this.draft = this.task.description;
 
-			this.task.editing = true;
+			this.editing = true;
 		},
 		update: function () {
 			if (this.draft != '') {
 				this.task.description = this.draft;
 			}
 
-			this.task.editing = false;
+			this.editing = false;
 		},
 		discard: function () {
-			this.task.editing = false;
+			this.editing = false;
 		},
 		remove: function () {
 			this.tasks.splice(this.index, 1);
@@ -43,33 +50,33 @@ Vue.component('app-task', {
 var vm = new Vue({
 	el: '#app',
 	data: {
-		draft: '',
 		new_task: '',
 		tasks: [
 			{
 				description: 'Aprender Vue.js',
-				pending: true,
-				editing: false
+				pending: true
 			},
 			{
 				description: 'Suscribirse a Styde.net',
-				pending: true,
-				editing: false
+				pending: true
 			},
 			{
 				description: 'Crear una API',
-				pending: false,
-				editing: false
+				pending: false
 			}
 		]
 	},
+	/*created: function () {
+		this.tasks.forEach(function (task) {
+			this.$set(task, 'editing', false);
+		}.bind(this));
+	},*/
 	methods: {
 		createTask: function () {
 			if (this.new_task != '') {
 				this.tasks.push({
 					description: this.new_task,
-					pending: true,
-					editing: false
+					pending: true
 				});
 
 				this.new_task = '';
