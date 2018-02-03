@@ -14,3 +14,18 @@ En nuestra aplicación tenemos diferentes acciones representadas por iconos:
 - Cuando presionemos el icono de editar, este icono junto con el de la papelera cambiarán y nos permitirán confirmar la actualización de la tarea o cancelar los cambios.
 
 Estas acciones nos permitirán completar un CRUD con un par de detalles adicionales.
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
