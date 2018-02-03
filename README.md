@@ -1,19 +1,19 @@
-# Todo App
-Cada tarea va a tener las siguientes propiedades:
+# Tasks App
+Each task will have the following properties:
 
-- Descripción (texto)
-- Estado (pendiente o completada)
-- Estado de edición (normal o en edición).
+- Description (text)
+- State (pending or completed)
+- Editing state (normal or in edition).
 
-En nuestra aplicación tenemos diferentes acciones representadas por iconos:
+In this app we have different actions represented by icons:
 
-- El icono cuadrado a la izquierda de la descripción de la tarea nos permitirá marcar dicha tarea como completada.
-- Si la tarea está como completada, dicho icono cambiará visualmente y al presionarlo nuevamente podemos marcar la tarea como no completada.
-- El icono del lápiz nos va a permitir editar la tarea
-- Mientras que el de la papelera nos va a permitir eliminarla.
-- Cuando presionemos el icono de editar, este icono junto con el de la papelera cambiarán y nos permitirán confirmar la actualización de la tarea o cancelar los cambios.
+- The square icon to the left of the task description will allow us to mark that task as completed.
+- If the task is completed, the icon will visually change and by pressing it again we can mark it as not completed (pending).
+- The pencil icon will allow us to edit the task.
+- While the trash basket one will allow us to remove it.
+- When we press the edit icon, this icon along with the trash icon will change and allow us to confirm the task update or cancel the changes.
 
-Estas acciones nos permitirán completar un CRUD con un par de detalles adicionales.
+These actions will allow us to complete a CRUD with a couple of additional details.
 
 ## Build Setup
 
