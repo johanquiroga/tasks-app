@@ -11,22 +11,17 @@
 <script>
 	import TaskList from './List.vue'
 	import TaskForm from './CreateForm.vue'
-	import data from 'data/data.json'
+	import store from 'store'
 
 	export default {
 		components: {
 			'task-list': TaskList,
 			'task-form': TaskForm
 		},
-		created() {
-			this.tasks.forEach((task, index) => {
-				this.$set(task, 'id', index + 1)
-			});
-		},
 		data() {
 			return {
 				new_task: '',
-				tasks: data.data
+				tasks: store.state.tasks
 			}
 		},
 		methods: {
