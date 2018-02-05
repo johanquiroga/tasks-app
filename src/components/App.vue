@@ -2,8 +2,10 @@
 	<div class="container" id="app">
 		<app-header title="Tasks App - johanquiroga.me"></app-header>
 
-		<router-link to="/dashboard">Dashboard</router-link>
-		<router-link to="/tasks">Tareas</router-link>
+		<ul class="nav nav-tabs">
+			<router-link tag="li" to="/" active-class="active" exact><a>Dashboard</a></router-link>
+			<router-link tag="li" to="tasks" active-class="active"><a>Tareas</a></router-link>
+		</ul>
 
 		<keep-alive>
 			<router-view></router-view>

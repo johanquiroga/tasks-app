@@ -91,7 +91,7 @@
 </script>
 
 <style lang="scss">
-	.task-list-item {
+	.list-group-item.task-list-item {
 	    display: flex;
 	    justify-content: space-between;
 
