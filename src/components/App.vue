@@ -4,7 +4,7 @@
 
 		<ul class="nav nav-tabs">
 			<router-link tag="li" to="/" active-class="active" exact><a>Dashboard</a></router-link>
-			<router-link tag="li" to="tasks" active-class="active"><a>Tareas</a></router-link>
+			<router-link tag="li" to="/tasks" active-class="active"><a>Tareas</a></router-link>
 		</ul>
 
 		<keep-alive>

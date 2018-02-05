@@ -4,10 +4,10 @@
 
 		<app-alert v-show="tasks.length == 0" msg="No hay tareas!!" type="warning"></app-alert>
 
-		<ul class="list-group tasks-list">
+		<div class="list-group tasks-list">
 			<task-item v-for="(task, index) in tasks" :key="task.id"
 			:task="task" :index="index" @remove="deleteTask"></task-item>
-		</ul>
+		</div>
 	</div>
 </template>
 
