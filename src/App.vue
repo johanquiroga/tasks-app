@@ -10,9 +10,7 @@
 
 		<app-task-form @created="createTask"></app-task-form>
 
-		<footer class="footer">
-			<p>&copy; 2018 Johan Quiroga.</p> 
-		</footer>
+		<app-footer></app-footer>
 	</div>
 </template>
 
@@ -20,12 +18,14 @@
 	import TaskList from './TaskList.vue'
 	import TaskForm from './TaskForm.vue'
 	import Alert from './Alert.vue'
+	import Footer from './Footer.vue'
 
 	export default {
 		components: {
 			'app-alert': Alert,
 			'app-task-list': TaskList,
-			'app-task-form': TaskForm
+			'app-task-form': TaskForm,
+			'app-footer': Footer
 		},
 		created() {
 			this.tasks.forEach((task, index) => {
@@ -73,12 +73,5 @@
 
 	.container h2 {
 	    margin-bottom: 20px;
-	}
-
-	.container footer {
-	    margin: 40px 0;
-	    padding-top: 20px;
-	    border-top: 1px solid #ccc;
-	    color: #999;
 	}
 </style>
