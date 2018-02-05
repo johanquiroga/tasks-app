@@ -1,25 +1,21 @@
 <template>
-	<div class="container" id="app">
-		<app-task-list :tasks="tasks"></app-task-list>
+	<div>
+		<task-list :tasks="tasks"></task-list>
 
 		<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
 
-		<app-task-form @created="createTask"></app-task-form>
-
-		<app-footer></app-footer>
+		<task-form @created="createTask"></task-form>
 	</div>
 </template>
 
 <script>
-	import TaskList from './TaskList.vue'
-	import TaskForm from './TaskForm.vue'
-	import Footer from './Footer.vue'
+	import TaskList from './List.vue'
+	import TaskForm from './CreateForm.vue'
 
 	export default {
 		components: {
-			'app-task-list': TaskList,
-			'app-task-form': TaskForm,
-			'app-footer': Footer
+			'task-list': TaskList,
+			'task-form': TaskForm
 		},
 		created() {
 			this.tasks.forEach((task, index) => {
@@ -55,21 +51,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	@import "./sass/app";
-
-	body {
-	    margin: 10px;
-	}
-
-	.container {
-		max-width: 650px;
-
-		h2 {
-	    	margin-bottom: 20px;
-		}
-	}
-
-	
-</style>
