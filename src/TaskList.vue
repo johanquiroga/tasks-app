@@ -34,13 +34,13 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.tasks-list {
 	    margin-bottom: 40px;
 	}
 </style>
 
-<style module>
+<style lang="scss" module>
 	.subtitle {
 		color: red;
 	}

@@ -56,16 +56,18 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	body {
 	    margin: 10px;
 	}
 
 	.container {
-	    max-width: 650px;
+		max-width: 650px;
+
+		h2 {
+	    	margin-bottom: 20px;
+		}
 	}
 
-	.container h2 {
-	    margin-bottom: 20px;
-	}
+	
 </style>

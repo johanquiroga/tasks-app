@@ -14,7 +14,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.app-footer {
 	    margin: 40px 0;
 	    padding-top: 20px;
