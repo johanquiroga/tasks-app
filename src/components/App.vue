@@ -2,7 +2,12 @@
 	<div class="container" id="app">
 		<app-header title="Tasks App - johanquiroga.me"></app-header>
 
-		<app-tasks></app-tasks>
+		<router-link to="/dashboard">Dashboard</router-link>
+		<router-link to="/tasks">Tareas</router-link>
+
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
 
 		<app-footer></app-footer>
 	</div>
@@ -10,13 +15,11 @@
 
 <script>
 	import Header from 'components/Layout/Header.vue'
-	import Tasks from 'components/Task/Tasks.vue'
 	import Footer from 'components/Layout/Footer.vue'
 
 	export default {
 		components: {
 			'app-header': Header,
-			'app-tasks': Tasks,
 			'app-footer': Footer
 		}
 	}
