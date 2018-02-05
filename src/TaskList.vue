@@ -1,5 +1,5 @@
 <template>
-	<ul class="list-group tasks">
+	<ul class="list-group tasks-list">
 		<app-task v-for="(task, index) in tasks" :key="task.id"
 		:task="task" :index="index" @remove="deleteTask"></app-task>
 	</ul>
@@ -20,3 +20,9 @@
 		}
 	}
 </script>
+
+<style>
+	.tasks-list {
+	    margin-bottom: 40px;
+	}
+</style>
