@@ -13,7 +13,7 @@
 
 <script>
 	import TaskItem from './ListItem.vue'
-	import Alert from 'components/Alert.vue'
+	import Alert from 'components/Commons/Alert.vue'
 
 	export default {
 		components: {

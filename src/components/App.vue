@@ -1,6 +1,6 @@
 <template>
 	<div class="container" id="app">
-		<h1 class="text-center">Tasks App - johanquiroga.me</h1>
+		<app-header title="Tasks App - johanquiroga.me"></app-header>
 
 		<app-tasks></app-tasks>
 
@@ -9,11 +9,13 @@
 </template>
 
 <script>
+	import Header from 'components/Layout/Header.vue'
 	import Tasks from 'components/Task/Tasks.vue'
-	import Footer from './Footer.vue'
+	import Footer from 'components/Layout/Footer.vue'
 
 	export default {
 		components: {
+			'app-header': Header,
 			'app-tasks': Tasks,
 			'app-footer': Footer
 		}

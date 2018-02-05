@@ -11,6 +11,7 @@
 <script>
 	import TaskList from './List.vue'
 	import TaskForm from './CreateForm.vue'
+	import data from 'data/data.json'
 
 	export default {
 		components: {
@@ -25,20 +26,7 @@
 		data() {
 			return {
 				new_task: '',
-				tasks: [
-					{
-						description: 'Aprender Vue.js',
-						pending: true
-					},
-					{
-						description: 'Suscribirse a Styde.net',
-						pending: true
-					},
-					{
-						description: 'Crear una API',
-						pending: false
-					}
-				]
+				tasks: data.data
 			}
 		},
 		methods: {

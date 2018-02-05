@@ -34,7 +34,7 @@
 </template>
 
 <script>
-	import Icon from 'components/Icon.vue'
+	import Icon from 'components/Commons/Icon.vue'
 
 	export default {
 		components: {
