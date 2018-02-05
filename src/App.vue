@@ -1,12 +1,8 @@
 <template>
 	<div class="container" id="app">
-		<h2>Tareas</h2>
-
-		<p class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></p>
-
-		<app-alert msg="No hay tareas!!" type="warning" v-show="tasks.length == 0"></app-alert>
-
 		<app-task-list :tasks="tasks"></app-task-list>
+
+		<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
 
 		<app-task-form @created="createTask"></app-task-form>
 
@@ -17,12 +13,10 @@
 <script>
 	import TaskList from './TaskList.vue'
 	import TaskForm from './TaskForm.vue'
-	import Alert from './Alert.vue'
 	import Footer from './Footer.vue'
 
 	export default {
 		components: {
-			'app-alert': Alert,
 			'app-task-list': TaskList,
 			'app-task-form': TaskForm,
 			'app-footer': Footer
