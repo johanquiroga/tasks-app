@@ -41,7 +41,9 @@
 </style>
 
 <style lang="scss" module>
+	@import "./sass/variables";
+
 	.subtitle {
-		color: red;
+		color: $error-color;
 	}
 </style>

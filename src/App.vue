@@ -57,6 +57,8 @@
 </script>
 
 <style lang="scss">
+	@import "./sass/app";
+
 	body {
 	    margin: 10px;
 	}
