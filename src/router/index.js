@@ -10,7 +10,8 @@ Vue.use(Router)
 const router = new Router({
 	routes: [
 		{
-			path: '/',
+			path: '/dashboard',
+			name: 'dashboard',
 			component: Dashboard
 		},
 		{
@@ -19,12 +20,14 @@ const router = new Router({
 			children: [
 				{
 					path: '',
+					name: 'tasks',
 					component: {
 						template: '<h2>Por favor selecciona una tarea</h2>'
 					}
 				},
 				{
 					path: ':id',
+					name: 'tasks.details',
 					component: TaskDetails,
 					props: true
 				}
