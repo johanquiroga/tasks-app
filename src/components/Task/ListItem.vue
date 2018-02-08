@@ -1,6 +1,6 @@
-<template>
+ <template>
 	<button type="button" @click="select" class="list-group-item task-list-item"
-		:class="{ completed: !task.pending }">
+		:class="{ active: isActive, completed: !task.pending }">
 		<a role="button" @click.stop="toggleStatus()">
 			<app-icon :img="task.pending ? 'unchecked' : 'check'" aria-hidden="true"></app-icon>
 		</a>
@@ -21,11 +21,15 @@
 				draft: ''
 			};
 		},
-		template: '#task-template',
-		props: ['task', 'index'],
+		props: ['task'],
+		computed: {
+			isActive() {
+				return this.task.id == this.$route.params.id;
+			}
+		},
 		methods: {
 			select() {
-				this.$router.push('/tasks/'+this.task.id);
+				this.$router.push(this.isActive ? '/tasks' : '/tasks/'+this.task.id);
 			},
 			toggleStatus() {
 				this.task.pending = !this.task.pending;
@@ -56,6 +60,10 @@
 			.description {
 				text-decoration: line-through;
 			}
+		}
+
+		&.active a {
+			color: white;
 		}
 	}
 </style>

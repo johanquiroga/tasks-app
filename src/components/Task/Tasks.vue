@@ -1,10 +1,16 @@
 <template>
-	<div>
-		<task-list :tasks="tasks"></task-list>
+	<div class="row">
+		<div class="col-xs-6 col-md-6">
+			<task-list :tasks="tasks"></task-list>
 
-		<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
+			<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
+		</div>
+		<div class="col-xs-6 col-md-6">
+			<router-view></router-view>
+		</div>
+		
 
-		<task-form @created="createTask"></task-form>
+		<!-- <task-form @created="createTask"></task-form> -->
 	</div>
 </template>
 

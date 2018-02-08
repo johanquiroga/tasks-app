@@ -6,7 +6,7 @@
 
 		<div class="list-group tasks-list">
 			<task-item v-for="(task, index) in tasks" :key="task.id"
-			:task="task" :index="index" @remove="deleteTask"></task-item>
+			:task="task" @remove="deleteTask"></task-item>
 		</div>
 	</div>
 </template>

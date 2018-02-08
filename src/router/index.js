@@ -15,12 +15,20 @@ const router = new Router({
 		},
 		{
 			path: '/tasks',
-			component: Tasks
-		},
-		{
-			path: '/tasks/:id',
-			component: TaskDetails,
-			props: true
+			component: Tasks,
+			children: [
+				{
+					path: '',
+					component: {
+						template: '<h2>Por favor selecciona una tarea</h2>'
+					}
+				},
+				{
+					path: ':id',
+					component: TaskDetails,
+					props: true
+				}
+			]
 		},
 		{
 			path: '/404',
