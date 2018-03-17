@@ -70,7 +70,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      disable: !inProduction
+    }),
     new PurifyCSSPlugin({
       // Give paths to parse for rules. These should be absolute!
       paths: glob.sync(path.join(__dirname, 'src/**/*.vue')),

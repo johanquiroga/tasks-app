@@ -1,12 +1,21 @@
 <template>
-	<div>
-		<h2>Tareas:</h2>
+	<div class="row">
+		<div class="col-xs-6 col-md-6">
+			<app-alert v-show="tasks.length == 0" msg="No hay tareas!!" type="warning"></app-alert>
 
-		<app-alert v-show="tasks.length == 0" msg="No hay tareas!!" type="warning"></app-alert>
+			<div class="top">
+				<h2>Tareas:</h2>
+				<router-link :to="{ name: 'tasks.create'}" class="btn btn-primary" role="button">Nueva Tarea</router-link>
+			</div>
 
-		<div class="list-group tasks-list">
-			<task-item v-for="(task, index) in tasks" :key="task.id"
-			:task="task" @remove="deleteTask"></task-item>
+			<div class="list-group tasks-list">
+				<task-item v-for="(task, index) in tasks" :key="task.id" :task="task"></task-item>
+			</div>
+
+			<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
+		</div>
+		<div class="col-xs-6 col-md-6">
+			<router-view></router-view>
 		</div>
 	</div>
 </template>
@@ -14,27 +23,38 @@
 <script>
 	import TaskItem from './ListItem.vue'
 	import Alert from 'components/Commons/Alert.vue'
+	import store from 'store'
 
 	export default {
 		components: {
 			'task-item': TaskItem,
-			'app-alert': Alert,
+			'app-alert': Alert
 		},
-		props: ['tasks'],
-		methods: {
-			deleteTask(index) {
-				this.tasks.splice(index, 1);
+		data() {
+			return {
+				new_task: '',
+				tasks: store.state.tasks
 			}
 		},
-		computed: {
-			hasPendingTasks() {
-				return this.tasks.some(task => task.pending);
+		methods: {
+			createTask(task) {
+				this.$set(task, 'id', this.tasks.length + 1);
+				this.tasks.push(task);
+			},
+			deleteCompleted() {
+				this.tasks = this.tasks.filter((task) => task.pending);
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.top {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+	}
+
 	.tasks-list {
 	    margin-bottom: 40px;
 	}

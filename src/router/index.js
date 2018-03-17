@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from 'components/Dashboard.vue'
-import Tasks from 'components/Task/Tasks.vue'
+import TaskList from 'components/Task/List.vue'
 import TaskDetails from 'components/Task/Details.vue'
+import TaskCreate from 'components/Task/Create.vue'
 import ErrorNotFound from 'components/errors/NotFound.vue'
 
 Vue.use(Router)
@@ -11,13 +12,13 @@ const router = new Router({
 	mode: 'history',
 	routes: [
 		{
-			path: '/dashboard',
+			path: '/',
 			name: 'dashboard',
 			component: Dashboard
 		},
 		{
 			path: '/tasks',
-			component: Tasks,
+			component: TaskList,
 			children: [
 				{
 					path: '',
@@ -31,6 +32,11 @@ const router = new Router({
 					name: 'tasks.details',
 					component: TaskDetails,
 					props: true
+				},
+				{
+					path: 'create',
+					name: 'tasks.create',
+					component: TaskCreate
 				}
 			]
 		},
