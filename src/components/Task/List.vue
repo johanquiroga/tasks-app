@@ -1,12 +1,12 @@
 <template>
 	<div class="row">
 		<div class="col-xs-6 col-md-6">
-			<app-alert v-show="tasks.length == 0" msg="No hay tareas!!" type="warning"></app-alert>
-
 			<div class="top">
 				<h2>Tareas:</h2>
 				<router-link :to="{ name: 'tasks.create'}" class="btn btn-primary" role="button">Nueva Tarea</router-link>
 			</div>
+
+			<app-alert v-show="tasks.length == 0" msg="No hay tareas!!" type="warning"></app-alert>
 
 			<div class="list-group tasks-list">
 				<task-item v-for="(task, index) in tasks" :key="task.id" :task="task"></task-item>
@@ -37,12 +37,10 @@
 			}
 		},
 		methods: {
-			createTask(task) {
-				this.$set(task, 'id', this.tasks.length + 1);
-				this.tasks.push(task);
-			},
 			deleteCompleted() {
-				this.tasks = this.tasks.filter((task) => task.pending);
+				// @FIXME
+				store.deleteCompleted();
+				// this.tasks = this.tasks.filter((task) => task.pending);
 			}
 		}
 	}

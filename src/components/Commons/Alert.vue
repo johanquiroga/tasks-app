@@ -8,8 +8,6 @@
 </template>
 
 <script>
-	import Icon from './Icon.vue'
-
 	export default {
 		data() {
 			return {
@@ -20,9 +18,6 @@
 					info: 'info-sign'
 				}
 			}
-		},
-		components: {
-			'app-icon': Icon
 		},
 		props: ['msg', 'type', 'icon'],
 		computed: {

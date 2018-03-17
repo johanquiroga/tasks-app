@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from 'router'
 import EventBus from 'event-bus.js'
 import App from './components/App.vue'
+import Icon from './components/Commons/Icon.vue';
 
 window.EventBus = EventBus
 
@@ -17,8 +18,10 @@ window.not_found_unless = function (condition) {
 	}
 };
 
+Vue.component('app-icon', Icon);
+
 new Vue({
 	el: '#app',
 	router,
 	render: h => h(App)
-})
+});

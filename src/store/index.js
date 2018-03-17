@@ -31,5 +31,16 @@ export default {
 		task.pending = true;
  
 		this.state.tasks.push(task);
+	},
+	toggleTask(task) {
+		task.pending = !task.pending;
+	},
+	deleteTask(id) {
+		let index = this.state.tasks.findIndex((task) => task.id === id);
+
+		this.state.tasks.splice(index, 1);
+	},
+	deleteCompleted() {
+		this.state.tasks = this.state.tasks.filter((task) => task.pending);
 	}
 };
