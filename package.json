@@ -1,13 +1,15 @@
 {
   "name": "task-app",
   "description": "A small CRUD project for tasks management with Vue.js 2",
+  "homepage": "http://tasks-app.johanquiroga.me",
   "version": "1.0.0",
   "author": "Johan Quiroga <johan.c.quiroga@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
@@ -34,6 +36,7 @@
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "sass-loader": "^6.0.6",
+    "vue-gh-pages": "^1.10.2",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
