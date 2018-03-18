@@ -13,8 +13,8 @@
 				<textarea id="description" cols="30" rows="6" v-model="task.description" class="form-control"></textarea>
 			</div>
 
-
 			<button class="btn btn-success">Crear tarea</button>
+			<button @click="$router.push({name: 'tasks'})" class="btn btn-danger">Cancelar</button>
 		</form>
 	</div>
 </template>

@@ -12,7 +12,7 @@
 				<task-item v-for="(task, index) in tasks" :key="task.id" :task="task"></task-item>
 			</div>
 
-			<div class="text-right"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
+			<div class="text-right" v-show="tasks.length"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
 		</div>
 		<div class="col-xs-6 col-md-6">
 			<router-view></router-view>
@@ -40,6 +40,8 @@
 			deleteCompleted() {
 				// @FIXME
 				store.deleteCompleted();
+
+				this.$router.replace({ name: 'tasks' });
 				// this.tasks = this.tasks.filter((task) => task.pending);
 			}
 		}

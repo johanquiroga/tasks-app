@@ -18,6 +18,10 @@ window.not_found_unless = function (condition) {
 	}
 };
 
+window.clone = function (obj) {
+	return JSON.parse(JSON.stringify(obj));
+};
+
 Vue.component('app-icon', Icon);
 
 new Vue({
