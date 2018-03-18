@@ -23,23 +23,12 @@
 
 	export default {
 		props: ['id'],
-		data() {
-			return {
-				task: null
+		computed: {
+			task() {
+				return store.findTask(this.id);
 			}
 		},
-		created() {
-			this.findTask();
-		},
-		watch: {
-			id: 'findTask'
-		},
 		methods: {
-			findTask() {
-				this.task = store.findTask(this.id);
-
-				not_found_unless(this.task);
-			},
 			toggleTask() {
 				store.toggleTask(this.task);
 			},

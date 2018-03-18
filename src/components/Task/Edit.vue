@@ -4,11 +4,12 @@
 
 	export default {
 		props: ['id'],
-		render(createElement) {
-			if (!this.task) {
-				return createElement('h2', 'Cargando tarea...');
+		computed: {
+			task() {
+				return store.findTask(this.id);
 			}
-
+		},
+		render(createElement) {
 			return createElement(Form, {
 				props: {
 					title: 'Editar tarea',
@@ -27,23 +28,6 @@
 					}
 				}
 			});
-		},
-		data() {
-			return {
-				task: null
-			}
-		},
-		created() {
-			this.findTask();
-		},
-		methods: {
-			findTask() {
-				setTimeout(() => {
-					this.task = store.findTask(this.id);
-
-					not_found_unless(this.task);
-				}, 2000);
-			}
 		}
 	}
 </script>

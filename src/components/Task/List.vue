@@ -30,18 +30,16 @@
 			'task-item': TaskItem,
 			'app-alert': Alert
 		},
-		data() {
-			return {
-				tasks: store.state.tasks
+		computed: {
+			tasks() {
+				return store.state.tasks;
 			}
 		},
 		methods: {
 			deleteCompleted() {
-				// @FIXME
-				store.deleteCompleted();
+				store.deleteCompletedTasks();
 
-				this.$router.replace({ name: 'tasks' });
-				// this.tasks = this.tasks.filter((task) => task.pending);
+				this.$router.replace({name: 'tasks'});
 			}
 		}
 	}

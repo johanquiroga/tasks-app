@@ -13,11 +13,6 @@
 	import store from 'store'
 	
 	export default {
-		data() {
-			return {
-				draft: ''
-			};
-		},
 		props: ['task'],
 		computed: {
 			isActive() {
