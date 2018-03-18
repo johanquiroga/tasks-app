@@ -1,6 +1,6 @@
 <template>
 	<div class="container" id="app">
-		<app-header title="Tasks App - johanquiroga.me"></app-header>
+		<app-header title="Tasks Management App"></app-header>
 
 		<ul class="nav nav-tabs">
 			<router-link tag="li" :to="{name: 'dashboard'}" active-class="active" exact><a>Dashboard</a></router-link>
