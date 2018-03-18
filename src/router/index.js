@@ -29,15 +29,15 @@ const router = new Router({
 					}
 				},
 				{
+					path: 'create',
+					name: 'tasks.create',
+					component: TaskCreate
+				},
+				{
 					path: ':id',
 					name: 'tasks.details',
 					component: TaskDetails,
 					props: true
-				},
-				{
-					path: 'create',
-					name: 'tasks.create',
-					component: TaskCreate
 				},
 				{
 					path: ':id/edit',

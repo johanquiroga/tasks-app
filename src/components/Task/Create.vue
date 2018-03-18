@@ -1,49 +1,34 @@
-<template>
-	<div>
-		<h2 class="subtitle">Nueva tarea:</h2>
-
-		<form @submit.prevent="create">
-			<div class="form-group">
-				<label for="title">Título</label>
-				<input type="text" v-model.trim="task.title" class="form-control" id="title">
-			</div>
-
-			<div class="form-group">
-				<label for="description">Descripción</label>
-				<textarea id="description" cols="30" rows="6" v-model="task.description" class="form-control"></textarea>
-			</div>
-
-			<button class="btn btn-success">Crear tarea</button>
-			<button @click="$router.push({name: 'tasks'})" class="btn btn-danger">Cancelar</button>
-		</form>
-	</div>
-</template>
-
 <script>
 	import store from 'store'
+	import Form from 'components/Commons/Form.vue'
 
 	export default {
-		data() {
-			return {
-				task: {
-					id: '',
-					title: '',
-					description: '',
-					pending: true
-				}
-			}
-		},
-		methods: {
-			create() {
-				if (this.task.title != '') {
-					store.createTask(this.task);
+		render(createElement) {
+			let task = {
+				id: '',
+				title: '',
+				description: '',
+				pending: true
+			};
 
-					this.$router.push({
-						name: 'tasks.details',
-						params: {id: this.task.id}
-					});
+			return createElement(Form, {
+				props: {
+					title: 'Nueva tarea',
+					action: 'Crear tarea',
+					cancelRedirect: {name: 'tasks'},
+					task
+				},
+				on: {
+					save: (newTask) => {
+						store.createTask(newTask);
+
+						this.$router.push({
+							name: 'tasks.details',
+							params: {id: newTask.id}
+						});
+					}
 				}
-			}
+			});
 		}
 	}
 </script>
