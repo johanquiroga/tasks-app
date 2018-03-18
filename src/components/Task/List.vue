@@ -32,7 +32,6 @@
 		},
 		data() {
 			return {
-				new_task: '',
 				tasks: store.state.tasks
 			}
 		},
