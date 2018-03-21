@@ -31,13 +31,11 @@
 			'app-alert': Alert
 		},
 		computed: {
-			tasks() {
-				return store.state.tasks;
-			}
+			tasks: () => store.state.tasks
 		},
 		methods: {
 			deleteCompleted() {
-				store.deleteCompletedTasks();
+				store.dispatch('deleteCompletedTasks');
 
 				this.$router.replace({name: 'tasks'});
 			}
