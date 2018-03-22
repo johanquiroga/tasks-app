@@ -9,14 +9,18 @@
 					title: 'Nueva tarea',
 					action: 'Crear tarea',
 					cancelRedirect: {name: 'tasks'},
-					task: {}
+					task: {
+						title: '',
+						description: ''
+					}
 				},
 				on: {
 					save: (draft) => {
-						let newTask = store.dispatch('createTask', draft);
-
-						this.$router.push({
-							name: 'tasks'
+						store.dispatch('createTask', draft).then((newTask) => {
+							this.$router.push({
+								name: 'tasks.details',
+								params: {id: newTask.id}
+							});
 						});
 					}
 				}
