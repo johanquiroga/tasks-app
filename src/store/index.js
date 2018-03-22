@@ -51,8 +51,7 @@ export default new Vuex.Store({
 
 			context.commit('createTask', newTask);
 
-			// FIXME:
-			// return newTask;
+			return newTask;
 		},
 		toggleTask(context, task) {
 			context.commit('toggleTask', task);
