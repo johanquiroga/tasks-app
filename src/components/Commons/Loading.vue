@@ -1,6 +1,6 @@
 <template>
 	<sweet-modal ref="loadingModal" blocking hide-close-button>
-		<v-loading :loader="event" slot="default" class="loading">
+		<v-loading :loader="event" slot="default" :class="$style.loading">
 			<template slot="spinner">
 				<app-spinner :size="60" />
 			</template>
@@ -17,7 +17,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 	.loading {
 		display: flex;
 		justify-content: center;
