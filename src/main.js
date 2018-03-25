@@ -3,7 +3,7 @@ import router from 'router'
 import App from './components/App.vue'
 import Icon from './components/Commons/Icon.vue'
 import Spinner from 'vue-spinner-component/src/Spinner.vue'
-import { SweetModal } from 'sweet-modal-vue'
+import SweetModal from 'sweet-modal-vue/src/plugin.js'
 import VueLoading from 'vuex-loading'
 import store from 'store'
 
@@ -24,8 +24,9 @@ window.clone = function (obj) {
 };
 
 Vue.use(VueLoading);
+Vue.use(SweetModal);
 
-Vue.component('sweet-modal', SweetModal);
+// Vue.component('SweetModal', SweetModal);
 Vue.component('app-icon', Icon);
 Vue.component('app-spinner', Spinner);
 

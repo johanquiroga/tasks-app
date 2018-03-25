@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var glob = require('glob')
 var PurifyCSSPlugin = require('purifycss-webpack')
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 var inProduction = process.env.NODE_ENV === 'production';
 
@@ -110,10 +111,12 @@ if (inProduction) {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJSPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        }
       }
     }),
     new webpack.LoaderOptionsPlugin({

@@ -40,6 +40,8 @@
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "sass-loader": "^6.0.7",
+    "uglify-es": "github:mishoo/UglifyJS2#harmony",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
