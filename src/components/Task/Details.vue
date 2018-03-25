@@ -19,18 +19,16 @@
 </template>
 
 <script>
-	import store from 'store'
-
 	export default {
 		props: ['id'],
 		computed: {
 			task() {
-				return store.getters.findTask(this.id);
+				return this.$store.getters.findTask(this.id);
 			}
 		},
 		methods: {
 			toggleTask() {
-				store.dispatch('toggleTask', this.task);
+				this.$store.dispatch('toggleTask', this.task);
 			},
 			editTask() {
 				this.$router.push({
@@ -39,9 +37,13 @@
 				});
 			},
 			deleteTask() {
-				store.dispatch('deleteTask', this.id);
+				this.$store.dispatch('deleteTask', this.id)
+					.then(() => {
+						this.$emit('showModal', 'success', 'Se ha eliminado la tarea correctamente');
 
-				this.$router.replace({ name: 'tasks' });
+						this.$router.replace({ name: 'tasks' });
+					})
+					.catch((e) => this.$emit('showModal', 'error', e));
 			}
 		}
 	}

@@ -1,12 +1,11 @@
 <script>
-	import store from 'store'
 	import Form from 'components/Commons/Form.vue'
 
 	export default {
 		props: ['id'],
 		computed: {
 			task() {
-				return store.getters.findTask(this.id);
+				return this.$store.getters.findTask(this.id);
 			}
 		},
 		render(createElement) {
@@ -15,16 +14,20 @@
 					title: 'Editar tarea',
 					action: 'Actualizar tarea',
 					cancelRedirect: {name: 'tasks.details', params: {id:this.id}},
+					loadingAction: 'Actualizando',
 					task: this.task
 				},
 				on: {
 					save: (draft) => {
-						store.dispatch('updateTask', { id: this.id, draft });
-
-						this.$router.push({
-							name: 'tasks.details',
-							params: {id: this.id}
-						});
+						this.$store.dispatch('updateTask', { id: this.id, draft })
+						.then((newTask) => {
+							this.$emit('showModal', 'success', 'Se ha actualizado la tarea correctamente');
+							this.$router.push({
+								name: 'tasks.details',
+								params: {id: this.id}
+							});
+						})
+						.catch((e) => this.$emit('showModal', 'error', e));
 					}
 				}
 			});

@@ -1,5 +1,9 @@
 <template>
 	<div class="row">
+		<sweet-modal ref="modal" :icon="status" @close="closeModal">
+			{{ response }}
+		</sweet-modal>
+
 		<div class="col-xs-6 col-md-6">
 			<div class="top">
 				<h2>Tareas:</h2>
@@ -15,7 +19,7 @@
 			<div class="text-right" v-show="tasks.length"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
 		</div>
 		<div class="col-xs-6 col-md-6">
-			<router-view></router-view>
+			<router-view @showModal="showModal"></router-view>
 		</div>
 	</div>
 </template>
@@ -23,21 +27,40 @@
 <script>
 	import TaskItem from './ListItem.vue'
 	import Alert from 'components/Commons/Alert.vue'
-	import store from 'store'
 
 	export default {
 		components: {
 			'task-item': TaskItem,
 			'app-alert': Alert
 		},
+		data() {
+			return {
+				status: '',
+				response: null
+			}
+		},
 		computed: {
-			tasks: () => store.state.tasks
+			tasks() {
+				return this.$store.state.tasks
+			}
 		},
 		methods: {
 			deleteCompleted() {
-				store.dispatch('deleteCompletedTasks');
-
-				this.$router.replace({name: 'tasks'});
+				this.$store.dispatch('deleteCompletedTasks')
+					.then(() => {
+						this.showModal('success', 'Se han eliminado las tareas correctamente');
+						this.$router.replace({name: 'tasks'});
+					})
+					.catch((e) => this.showModal('error', e));
+			},
+			showModal(status, msg) {
+				this.status = status;
+				this.response = msg;
+				this.$refs.modal.open();
+			},
+			closeModal() {
+				this.status = '';
+				this.response = null;
 			}
 		}
 	}
