@@ -10,8 +10,6 @@
 </template>
 
 <script>
-	import store from 'store'
-	
 	export default {
 		props: ['task'],
 		computed: {
@@ -28,7 +26,7 @@
 				this.$router.push(route);
 			},
 			toggleStatus() {
-				store.dispatch('toggleTask', this.task);
+				this.$store.dispatch('toggleTask', this.task);
 			}
 		}
 	}

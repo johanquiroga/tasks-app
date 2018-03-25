@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import tasks from './tasks.js'
+import { createActionHelpers } from 'vuex-loading'
 
 Vue.use(Vuex)
+
+const { startLoading, endLoading } = createActionHelpers({
+	moduleName: 'loading'
+});
 
 export default new Vuex.Store({
 	state: {
@@ -42,16 +47,26 @@ export default new Vuex.Store({
 	},
 	actions: {
 		createTask(context, { title, description }) {
-			let newTask = {
+    	let newTask = {
 				id: context.state.tasks.length + 1,
 				title,
 				description,
 				pending: true
 			};
 
-			context.commit('createTask', newTask);
+			return startLoading(context.dispatch, 'creando tarea', () => {
+				return new Promise((resolve, reject) => {
+          setTimeout(() => {
+          	if (title == '') {
+              return reject('Debes escribir un título');
+            }
 
-			return newTask;
+            context.commit('createTask', newTask);
+
+            return resolve(newTask);
+          }, 1500)
+	      })
+			});
 		},
 		toggleTask(context, task) {
 			context.commit('toggleTask', task);
