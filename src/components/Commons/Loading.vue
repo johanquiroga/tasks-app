@@ -17,7 +17,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.loading {
 		display: flex;
 		justify-content: center;
