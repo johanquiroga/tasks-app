@@ -112,8 +112,8 @@ if (inProduction) {
       }
     }),
     new UglifyJSPlugin({
-      sourceMap: true,
       uglifyOptions: {
+        sourceMap: true,
         compress: {
           warnings: false
         }
