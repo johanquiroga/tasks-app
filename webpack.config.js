@@ -4,6 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var glob = require('glob')
 var PurifyCSSPlugin = require('purifycss-webpack')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+var MinifyPlugin = require("babel-minify-webpack-plugin")
 
 var inProduction = process.env.NODE_ENV === 'production';
 
@@ -119,6 +120,10 @@ if (inProduction) {
         }
       }
     }),
+    // new MinifyPlugin({}, {
+    //   comments: false,
+    //   sourceMap: null
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
