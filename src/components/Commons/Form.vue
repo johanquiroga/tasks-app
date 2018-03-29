@@ -2,8 +2,6 @@
 	<div>
 		<h2 class="subtitle">{{ title }}</h2>
 
-		<app-loading v-if="isLoading" :event="loadingAction.toLowerCase() + ' tarea'"/>
-
 		<form @submit.prevent="save">
 			<div class="form-group">
 				<label for="title">Título</label>
@@ -16,8 +14,8 @@
 			</div>
 
 			<button class="btn btn-success" :disabled="isLoading">
-				<v-loading :loader="loadingAction.toLowerCase() + ' tarea'">
-					<template slot="spinner">{{loadingAction}} tarea...</template>
+				<v-loading :loader="loadingAction">
+					<template slot="spinner">{{actionMessage}} tarea...</template>
 					{{ action }}
 				</v-loading>
 			</button>
@@ -28,12 +26,7 @@
 </template>
 
 <script>
-	import Loading from 'components/Commons/Loading.vue'
-
 	export default {
-		components: {
-			'app-loading': Loading
-		},
 		props: ['title', 'action', 'task', 'cancelRedirect', 'loadingAction'],
 		data() {
 			return {
@@ -42,16 +35,28 @@
 		},
 		computed: {
 			isLoading() {
-				return this.$loading.isLoading(this.loadingAction.toLowerCase() + ' tarea');
+				return this.$loading.isLoading(this.loadingAction);
+			},
+			actionMessage() {
+				return this.loadingAction == 'tasks.create' ? 'Creando ' : 'Actualizando'
 			}
 		},
 		methods: {
 			save() {
 				this.$emit('save', this.draft);
-				if (this.draft.title != '') {
-
+			},
+			loader() {
+				if (this.isLoading) {
+					this.$swal({
+						title: this.actionMessage,
+						onOpen: () => this.$swal.showLoading(),
+						allowOutsideClick: () => !this.isLoading
+					})
 				}
 			}
+		},
+		watch: {
+			isLoading: 'loader'
 		}
 	}
 </script>

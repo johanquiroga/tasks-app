@@ -11,8 +11,13 @@
 			<button @click="editTask" class="btn btn-default">
 				<app-icon img="edit"></app-icon> Editar
 			</button>
-			<button @click="deleteTask" class="btn btn-default">
-				<app-icon img="trash"></app-icon> Eliminar
+			<button @click="deleteTask" class="btn btn-default" :disabled="isDeleteLoading">
+				<v-loading loader="tasks.delete">
+					<template slot="spinner">
+						<app-icon img="trash"></app-icon> Eliminando tarea...
+					</template>
+					<app-icon img="trash"></app-icon> Eliminar
+				</v-loading>
 			</button>
 		</div>
 	</div>
@@ -24,6 +29,9 @@
 		computed: {
 			task() {
 				return this.$store.getters.findTask(this.id);
+			},
+			isDeleteLoading() {
+				return this.$loading.isLoading('tasks.delete');
 			}
 		},
 		methods: {
@@ -37,13 +45,30 @@
 				});
 			},
 			deleteTask() {
-				this.$store.dispatch('deleteTask', this.id)
-					.then(() => {
-						this.$emit('showModal', 'success', 'Se ha eliminado la tarea correctamente');
+				this.$swal({
+					title: '¿Estás seguro?',
+					text: 'No podrás revertir esta acción',
+					type: 'warning',
+					showCancelButton: true,
+					showLoaderOnConfirm: true,
+					preConfirm: () => this.$store.dispatch('deleteTask', this.id),
+					allowOutsideClick: () => !this.isDeleteLoading
+				})
+					.then((result) => {
+						if (result.value) {
+							this.$swal({
+								title: 'Se ha eliminado la tarea correctamente',
+								type:'success'
+							});
 
-						this.$router.replace({ name: 'tasks' });
+							this.$router.replace({name: 'tasks'});
+						}
 					})
-					.catch((e) => this.$emit('showModal', 'error', e));
+					.catch((e) => this.$swal({
+						title: 'Error',
+						text: e,
+						type:'error'
+					}));
 			}
 		}
 	}

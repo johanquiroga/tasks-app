@@ -54,7 +54,7 @@ export default new Vuex.Store({
 				pending: true
 			};
 
-			return startLoading(context.dispatch, 'creando tarea', () => {
+			return startLoading(context.dispatch, 'tasks.create', () => {
 				return new Promise((resolve, reject) => {
           setTimeout(() => {
           	if (title == '') {
@@ -72,13 +72,41 @@ export default new Vuex.Store({
 			context.commit('toggleTask', task);
 		},
 		updateTask(context, task) {
-			context.commit('updateTask', task);
+			return startLoading(context.dispatch, 'tasks.edit', () => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						if (task.draft.title == '') {
+							return reject('No puedes dejar el título vacío');
+						}
+
+						context.commit('updateTask', task);
+
+						return resolve(task);
+					}, 1500)
+				})
+			})
 		},
 		deleteTask(context, id) {
-			context.commit('deleteTask', id);
+			return startLoading(context.dispatch, 'tasks.delete', () => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						context.commit('deleteTask', id);
+
+						return resolve();
+					}, 1000)
+				})
+			})
 		},
 		deleteCompletedTasks(context) {
-			context.commit('deleteCompletedTasks');
+			return startLoading(context.dispatch, 'tasks.deleteCompleted', () => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						context.commit('deleteCompletedTasks');
+
+						return resolve();
+					}, 1500)
+				})
+			})
 		}
 	}
 })

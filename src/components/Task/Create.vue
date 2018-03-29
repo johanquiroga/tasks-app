@@ -8,7 +8,7 @@
 					title: 'Nueva tarea',
 					action: 'Crear tarea',
 					cancelRedirect: {name: 'tasks'},
-					loadingAction: 'Creando',
+					loadingAction: 'tasks.create',
 					task: {
 						title: '',
 						description: ''
@@ -18,13 +18,20 @@
 					save: (draft) => {
 						this.$store.dispatch('createTask', draft)
 							.then((newTask) => {
-								this.$emit('showModal', 'success', 'Se ha creado la tarea correctamente');
+								this.$swal({
+									title: 'Se ha creado la tarea correctamente', 
+									type: 'success'
+								});
 								this.$router.push({
 									name: 'tasks.details',
 									params: {id: newTask.id}
 								});
 							})
-							.catch((e) => this.$emit('showModal', 'error', e));
+							.catch((e) => this.$swal({
+								title: 'Error',
+								text: e,
+								type:'error'
+							}));
 					}
 				}
 			});

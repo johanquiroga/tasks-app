@@ -1,9 +1,5 @@
 <template>
 	<div class="row">
-		<sweet-modal ref="modal" :icon="status" @close="closeModal">
-			{{ response }}
-		</sweet-modal>
-
 		<div class="col-xs-6 col-md-6">
 			<div class="top">
 				<h2>Tareas:</h2>
@@ -16,10 +12,19 @@
 				<task-item v-for="(task, index) in tasks" :key="task.id" :task="task"></task-item>
 			</div>
 
-			<div class="text-right" v-show="tasks.length"><a @click="deleteCompleted" class="btn btn-danger" role="button">Eliminar tareas completadas</a></div>
+			<div class="text-right" v-show="tasks.length">
+				<a @click="deleteCompleted" class="btn btn-danger" role="button" :disabled="isDeleteCompletedLoading">
+					<v-loading loader="tasks.deleteCompleted">
+						<template slot="spinner">
+							Eliminando tareas...
+						</template>
+						Eliminar tareas completadas
+					</v-loading>
+				</a>
+			</div>
 		</div>
 		<div class="col-xs-6 col-md-6">
-			<router-view @showModal="showModal"></router-view>
+			<router-view></router-view>
 		</div>
 	</div>
 </template>
@@ -33,34 +38,40 @@
 			'task-item': TaskItem,
 			'app-alert': Alert
 		},
-		data() {
-			return {
-				status: '',
-				response: null
-			}
-		},
 		computed: {
 			tasks() {
 				return this.$store.state.tasks
+			},
+			isDeleteCompletedLoading() {
+				return this.$loading.isLoading('tasks.deleteCompleted');
 			}
 		},
 		methods: {
 			deleteCompleted() {
-				this.$store.dispatch('deleteCompletedTasks')
-					.then(() => {
-						this.showModal('success', 'Se han eliminado las tareas correctamente');
-						this.$router.replace({name: 'tasks'});
+				this.$swal({
+					title: '¿Estás seguro?',
+					text: 'No podrás revertir esta acción',
+					type: 'warning',
+					showCancelButton: true,
+					showLoaderOnConfirm: true,
+					preConfirm: () => this.$store.dispatch('deleteCompletedTasks'),
+					allowOutsideClick: () => !this.isDeleteCompletedLoading
+				})
+					.then((result) => {
+						if (result.value) {
+							this.$swal({
+								title: 'Se han eliminado las tareas correctamente',
+								type: 'success'
+							});
+
+							this.$router.replace({name: 'tasks'});
+						}
 					})
-					.catch((e) => this.showModal('error', e));
-			},
-			showModal(status, msg) {
-				this.status = status;
-				this.response = msg;
-				this.$refs.modal.open();
-			},
-			closeModal() {
-				this.status = '';
-				this.response = null;
+					.catch((e) => this.$swal({
+						title: 'Error',
+						text: e,
+						type:'error'
+					}));
 			}
 		}
 	}

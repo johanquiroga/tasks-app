@@ -2,14 +2,11 @@ import Vue from 'vue'
 import router from 'router'
 import App from './components/App.vue'
 import Icon from './components/Commons/Icon.vue'
-import Spinner from 'vue-spinner-component/src/Spinner.vue'
-import SweetModal from 'sweet-modal-vue/src/plugin.js'
+import VueSweetalert2 from 'vue-sweetalert2'
 import VueLoading from 'vuex-loading'
 import store from 'store'
 
 window.not_found = function () {
-	console.log('Not found: ' + router.currentRoute.fullPath);
-	
 	router.replace('/404');
 };
 
@@ -24,11 +21,9 @@ window.clone = function (obj) {
 };
 
 Vue.use(VueLoading);
-Vue.use(SweetModal);
+Vue.use(VueSweetalert2);
 
-// Vue.component('SweetModal', SweetModal);
 Vue.component('app-icon', Icon);
-Vue.component('app-spinner', Spinner);
 
 new Vue({
 	el: '#app',

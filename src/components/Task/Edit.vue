@@ -14,20 +14,28 @@
 					title: 'Editar tarea',
 					action: 'Actualizar tarea',
 					cancelRedirect: {name: 'tasks.details', params: {id:this.id}},
-					loadingAction: 'Actualizando',
+					loadingAction: 'tasks.edit',
 					task: this.task
 				},
 				on: {
 					save: (draft) => {
 						this.$store.dispatch('updateTask', { id: this.id, draft })
-						.then((newTask) => {
-							this.$emit('showModal', 'success', 'Se ha actualizado la tarea correctamente');
-							this.$router.push({
-								name: 'tasks.details',
-								params: {id: this.id}
-							});
-						})
-						.catch((e) => this.$emit('showModal', 'error', e));
+							.then((newTask) => {
+								this.$swal({
+									title: 'Se ha actualizado la tarea correctamente',
+									type: 'success'
+								});
+								
+								this.$router.push({
+									name: 'tasks.details',
+									params: {id: this.id}
+								});
+							})
+							.catch((e) => this.$swal({
+								title: 'Error',
+								text: e,
+								type:'error'
+							}));
 					}
 				}
 			});
