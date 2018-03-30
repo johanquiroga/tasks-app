@@ -48,7 +48,7 @@
 			loader() {
 				if (this.isLoading) {
 					this.$swal({
-						title: this.actionMessage,
+						title: this.actionMessage + ' tarea',
 						onOpen: () => this.$swal.showLoading(),
 						allowOutsideClick: () => !this.isLoading
 					})
